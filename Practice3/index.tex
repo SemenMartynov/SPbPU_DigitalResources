@@ -1,0 +1,381 @@
+\documentclass[a4paper, 12pt]{report}		% general format
+
+%%%% Charset
+\usepackage{cmap}							% make PDF files searchable and copyable
+\usepackage[utf8]{inputenc}					% accept different input encodings
+\usepackage[T2A]{fontenc}					% russian font
+\usepackage[russian]{babel}					% multilingual support (T2A)
+
+%%%% Graphics
+\usepackage[dvipsnames]{xcolor}			% driver-independent color extensions
+\usepackage{graphicx}						% enhanced support for graphics
+\usepackage{wrapfig}						% pro­duces fig­ures which text can flow around
+
+%%%% Math
+\usepackage{amsmath}						% Amer­i­can Math­e­mat­i­cal So­ci­ety (AMS) math fa­cil­i­ties
+\usepackage{amsfonts}						% fonts from the AMS
+\usepackage{amssymb}						% additional math symbols
+
+%%%% Ty­po­grapy (don't forget about cm-super)
+\usepackage{microtype}						% sublim­i­nal re­fine­ments to­wards ty­po­graph­i­cal per­fec­tion
+\linespread{1.3}							% line spacing
+\usepackage[left=2.5cm, right=1.5cm, top=2.5cm, bottom=2.5cm]{geometry}
+\setlength{\parindent}{0pt}					% we don't want any paragraph indentation
+\renewcommand{\chaptername}{}
+
+%%%% Other
+\usepackage{hyperref}							% ver­ba­tim with URL-sen­si­tive line breaks
+%\DeclareUnicodeCharacter{00A0}{~}
+\usepackage{float}
+
+%------------------------------------------------------------------------------
+\usepackage{listings}						% type­set source code list­ings
+
+% Цвета для кода
+\definecolor{string}{HTML}{101AF9}			% цвет строк в коде
+\definecolor{comment}{HTML}{3F7F5F}		% цвет комментариев в коде
+\definecolor{keyword}{HTML}{5F1441}		% цвет ключевых слов в коде
+\definecolor{morecomment}{HTML}{8000FF}	% цвет include и других элементов в коде
+\definecolor{captiontext}{HTML}{FFFFFF}	% цвет текста заголовка в коде
+\definecolor{captionbk}{HTML}{999999}		% цвет фона заголовка в коде
+\definecolor{bk}{HTML}{FFFFFF}				% цвет фона в коде
+\definecolor{frame}{HTML}{999999}			% цвет рамки в коде
+
+% Настройки отображения кода
+\lstset{
+	language=C++,							% Язык кода по умолчанию
+	morekeywords={*,...},					% если хотите добавить ключевые слова, то добавляйте
+	% Цвета
+	keywordstyle=\color{keyword}\ttfamily\bfseries,
+	stringstyle=\color{string}\ttfamily,
+	commentstyle=\color{comment}\ttfamily\itshape,
+	morecomment=[l][\color{morecomment}]{\#},
+	% Настройки отображения
+	breaklines=true,						% Перенос длинных строк
+	basicstyle=\ttfamily\footnotesize,		% Шрифт для отображения кода
+	backgroundcolor=\color{bk},				% Цвет фона кода
+	%frame=lrb,xleftmargin=\fboxsep,xrightmargin=-\fboxsep, % Рамка, подогнанная к заголовку
+	frame=tblr								% draw a frame at all sides of the code block
+	rulecolor=\color{frame},				% Цвет рамки
+	tabsize=2,								% tab space width
+	showstringspaces=false,					% don't mark spaces in strings
+	% Настройка отображения номеров строк. Если не нужно, то удалите весь блок
+	numbers=left,							% Слева отображаются номера строк
+	stepnumber=1,							% Каждую строку нумеровать
+	numbersep=5pt,							% Отступ от кода
+	numberstyle=\small\color{black},		% Стиль написания номеров строк
+	% Для отображения русского языка
+	extendedchars=true,
+    literate=
+        {Ö}{{\"O}}1                    {Ä}{{\"A}}1                    {Ü}{{\"U}}1
+        {ß}{{\ss}}1                    {ü}{{\"u}}1                    {ä}{{\"a}}1
+        {ö}{{\"o}}1                    {~}{{\textasciitilde}}1        {а}{{\selectfont\char224}}1
+        {б}{{\selectfont\char225}}1    {в}{{\selectfont\char226}}1    {г}{{\selectfont\char227}}1
+        {д}{{\selectfont\char228}}1    {е}{{\selectfont\char229}}1    {ё}{{\"e}}1
+        {ж}{{\selectfont\char230}}1    {з}{{\selectfont\char231}}1    {и}{{\selectfont\char232}}1
+        {й}{{\selectfont\char233}}1    {к}{{\selectfont\char234}}1    {л}{{\selectfont\char235}}1
+        {м}{{\selectfont\char236}}1    {н}{{\selectfont\char237}}1    {о}{{\selectfont\char238}}1
+        {п}{{\selectfont\char239}}1    {р}{{\selectfont\char240}}1    {с}{{\selectfont\char241}}1
+        {т}{{\selectfont\char242}}1    {у}{{\selectfont\char243}}1    {ф}{{\selectfont\char244}}1
+        {х}{{\selectfont\char245}}1    {ц}{{\selectfont\char246}}1    {ч}{{\selectfont\char247}}1
+        {ш}{{\selectfont\char248}}1    {щ}{{\selectfont\char249}}1    {ъ}{{\selectfont\char250}}1
+        {ы}{{\selectfont\char251}}1    {ь}{{\selectfont\char252}}1    {э}{{\selectfont\char253}}1
+        {ю}{{\selectfont\char254}}1    {я}{{\selectfont\char255}}1    {А}{{\selectfont\char192}}1
+        {Б}{{\selectfont\char193}}1    {В}{{\selectfont\char194}}1    {Г}{{\selectfont\char195}}1
+        {Д}{{\selectfont\char196}}1    {Е}{{\selectfont\char197}}1    {Ё}{{\"E}}1
+        {Ж}{{\selectfont\char198}}1    {З}{{\selectfont\char199}}1    {И}{{\selectfont\char200}}1
+        {Й}{{\selectfont\char201}}1    {К}{{\selectfont\char202}}1    {Л}{{\selectfont\char203}}1
+        {М}{{\selectfont\char204}}1    {Н}{{\selectfont\char205}}1    {О}{{\selectfont\char206}}1
+        {П}{{\selectfont\char207}}1    {Р}{{\selectfont\char208}}1    {С}{{\selectfont\char209}}1
+        {Т}{{\selectfont\char210}}1    {У}{{\selectfont\char211}}1    {Ф}{{\selectfont\char212}}1
+        {Х}{{\selectfont\char213}}1    {Ц}{{\selectfont\char214}}1    {Ч}{{\selectfont\char215}}1
+        {Ш}{{\selectfont\char216}}1    {Щ}{{\selectfont\char217}}1    {Ъ}{{\selectfont\char218}}1
+        {Ы}{{\selectfont\char219}}1    {Ь}{{\selectfont\char220}}1    {Э}{{\selectfont\char221}}1
+        {Ю}{{\selectfont\char222}}1    {Я}{{\selectfont\char223}}1    {і}{{\selectfont\char105}}1
+        {ї}{{\selectfont\char168}}1    {є}{{\selectfont\char185}}1    {ґ}{{\selectfont\char160}}1
+        {І}{{\selectfont\char73}}1     {Ї}{{\selectfont\char136}}1    {Є}{{\selectfont\char153}}1
+        {Ґ}{{\selectfont\char128}}1
+}
+
+% Для настройки заголовка кода
+\usepackage{caption}
+\DeclareCaptionFont{white}{\color{сaptiontext}}
+\DeclareCaptionFormat{listing}{\parbox{\linewidth}{\colorbox{сaptionbk}{\parbox{\linewidth}{#1#2#3}}\vskip-4pt}}
+%\captionsetup[lstlisting]{format=listing,labelfont=white,textfont=white}
+\renewcommand{\lstlistingname}{Листинг} % Переименование Listings в нужное именование структуры
+\setlength{\parskip}{0.5cm}
+
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.9}
+
+%------------------------------------------------------------------------------
+\begin{document}
+
+\input{titlepage}                            % inclide the title page
+\tableofcontents
+%\input{text}                                 % inclide the main text
+%\input{sources}                              % inclide the list of sources
+
+\chapter*{Задание 1. Поиск узкоспециализированных источников.}
+\addcontentsline{toc}{chapter}{Задание 1. Поиск узкоспециализированных источников.}
+
+\textbf{Задание:} Поиск узкоспециализированных источников по теме – сайты и работы отдельных научных коллективов:
+
+\begin{itemize}
+\item НИИ;
+\item научные лаборатории;
+\item научные группы;
+\item отдельные ученые.
+\end{itemize}
+
+Представить по каждому подпункту по 5-7 наиболее релевантных источников.
+
+\vspace{1cm}
+
+Санкт-Петербургский государственный университет: Центр технологий распределенных
+реестров СПбГУ (\url{https://dltc.spbu.ru/}). Осуществляет исследования, разрабатывают образовательные программы, оказываются экспертные услуги и создают программные решения с использованием технологий распределенных реестров (блокчейн).
+
+Федеральное государственное автономное образовательное учреждение высшего образования «Пермский государственный национальный исследовательский университет» (ПГНИУ): Лаборатория криптоэкономики и блокчейн-систем (\url{http://www.psu.ru/fakultety/ekonomicheskij-fakultet/laboratorii/laboratoriya-kriptoekonomiki-i-blokchejn-sistem}). Исследования направлены на создание математических моделей и практическое применение блокчейн-систем и смарт-контрактов для решения прикладных задач, таких как межбанковские и биржевые расчеты, финансовые расчеты в международных холдингах и группах, открытое электронное голосование, подтверждение авторских прав на цифровой контент и электронный нотариат.
+
+Федеральное государственное образовательное бюджетное учреждение высшего образования "Финансовый университет при Правительстве Российской Федерации": Блокчейн-лаборатория (\url{http://www.fa.ru/org/science/irce/blockchainlab/Pages/Home.aspx}). Финансовый университет выиграл и выполнил тендер Государственной думы РФ на проведение экспертно-аналитического исследования по теме, связанной с технологией блокчейна и криптовалютам. Проводит Научно-исследовательские и опытно-конструкторские работы, связанные с внедрением технологии блокчейн в государственном и корпоративном секторах.
+
+Калифорнийский университет в Беркли (The University of California, Berkeley): Harness the power of blockchain and cryptocurrencies (\url{https://www.edx.org/professional-certificate/uc-berkeleyx-blockchain-fundamentals})
+
+MIT (Массачусетский технологический институт): Blockchain Technologies: Business Innovation and Application (\url{https://executive.mit.edu/course/blockchain-technologies/a056g00000URaa7AAD.html})
+
+Stanford School of Engineering: Cryptocurrencies and Blockchain Technologies (\url{https://online.stanford.edu/courses/xcs251-cryptocurrencies-and-blockchain-technologies}).
+
+\begin{itemize}
+\item Корхов Владимир Владиславович (Доктор экономических наук, Профессор кафедры управления рисками и страхования СПбГУ).
+\item Сергей Владимирович Ивлиев (Кандидат экономических наук, Руководитель Лаборатории криптоэкономики и блокчейн-систем ПГНИУ)
+\item Виталий Бутерин (Создатель Etherium)
+\item Горгадзе Владимир Вячеславович (Ph.D. теоретической физики, Калифорнийский университет в Беркли)
+\item Баргер Артем Иосифович (Научный сотрудник IBM, работающий в группе Cloud Foundation в Хайфской исследовательской лаборатории)
+\end{itemize}
+
+\chapter*{Задание 2. Представить полный список отобранных источников.}
+\addcontentsline{toc}{chapter}{Задание 2. Представить полный список отобранных источников.}
+
+\textbf{Задание:} Представить полный список отобранных источников (использовать результаты ЛР1 И ЛР2 и п.1 данной ЛР3), распределив их по пунктам
+
+Списки находятся в файлах \textit{library.eng.bib} и \textit{library.rus.bib}
+
+При классификации материалов, я максимально старался избегать повторов. Но это оказалось довольно затруднительной задачей, т.к. в одной работе могут встречаться и исторические аспекты и современное состояние.
+
+
+\section*{2.1. Актуальность поставленной проблемы}
+\addcontentsline{toc}{section}{2.1. Актуальность поставленной проблемы}
+
+\begin{itemize}
+\item Анализ блокчейн-технологии: основы архитектуры, примеры использования, перспективы развития, проблемы и недостатки
+\item Технологии, реализующие принцип распределенного реестра, и возможности их применения в информационных системах
+\end{itemize}
+
+\section*{2.2. Формулировка сути проблемы}
+\addcontentsline{toc}{section}{2.2. Формулировка сути проблемы}
+
+\begin{itemize}
+\item The essence of cryptocurrencies: Descriptive and comparative analysis
+\item Технологические принципы функционирования блокчейн
+\item Анализ блокчейн-технологии: основы архитектуры, примеры использования, перспективы развития, проблемы и недостатки
+\end{itemize}
+
+\section*{2.3. Объект и предмет исследований и разработок}
+\addcontentsline{toc}{section}{2.3. Объект и предмет исследований и разработок}
+
+\begin{itemize}
+\item Технологические принципы функционирования блокчейн
+\item Анализ блокчейн-технологии: основы архитектуры, примеры использования, перспективы развития, проблемы и недостатки
+\end{itemize}
+
+\section*{2.4. Соотношение темы с другими смежными темами и ее особенности, значимость}
+\addcontentsline{toc}{section}{2.4. Соотношение темы с другими смежными темами и ее особенности, значимость}
+
+\begin{itemize}
+\item К вопросу о выборе платформы распределенного реестра при проектировании информационных систем финансового сектора экономики
+\item Концепция распределенного реестра на основе графов в системах распределенной энергетики
+\item Применение системы распределенного реестра для повышения оперативного учета и контроля технического состояния элементов распределенной информационной системы
+\item Разработка элементов распределенной библиотеки на базе распределенного реестра для систем мониторинга и диагностики
+\item Разработка модели распределенного хранилища данных на базе технологии распределенного реестра для систем мониторинга
+\end{itemize}
+
+
+\section*{2.5. Исторический аспект появления и развития рассматриваемой проблемы}
+\addcontentsline{toc}{section}{2.5. Исторический аспект появления и развития рассматриваемой проблемы}
+
+\begin{itemize}
+\item Технологические принципы функционирования блокчейн
+\item Анализ блокчейн-технологии: основы архитектуры, примеры использования, перспективы развития, проблемы и недостатки
+\end{itemize}
+
+\section*{2.6. Современное состояние проблемы}
+\addcontentsline{toc}{section}{2.6. Современное состояние проблемы}
+
+\begin{itemize}
+\item Анализ практической реализации технологии распределённого реестра
+\end{itemize}
+
+\section*{2.7. Кто занимается данной проблемой}
+\addcontentsline{toc}{section}{2.7. Кто занимается данной проблемой}
+
+Изучением, развитием и практическим применением блокчейна занимается огромное количество как коммерческих компаний (это было видно при просмотре патентов, выданых в Китае), так и научных организаций (в задании 1 текущей работы несколько примеров из ведущих ВУЗов), и даже независимые сообщеста разработчиков.
+
+\section*{2.8. Основные теоретические и методические положения}
+\addcontentsline{toc}{section}{2.8. Основные теоретические и методические положения}
+
+\begin{itemize}
+\item Методика обеспечения своевременности и полноты обмена информационными ресурсами в корпоративных сетях с распределенным реестром
+\item Анализ открытого блокчейна в рамках комплексной классификации технологии распределенного реестра
+\item Анализ практической реализации технологии распределённого реестра
+\item Proof-of-randomness protocol for blockchain consensus: the white paper version 1.0
+\end{itemize}
+
+\section*{2.9. Подходы (методы и методологии) к решению проблемы с программной или аппаратной реализацией}
+\addcontentsline{toc}{section}{2.9. Подходы (методы и методологии) к решению проблемы с программной или аппаратной реализацией}
+
+\begin{itemize}
+\item Decision Making using the Blockchain Proof of Authority Consensus
+\item Proof of Learning (PoLe): Empowering neural network training with consensus building on blockchains
+\item Consensus mechanism for software-defined blockchain in internet of things
+\item Weighted Byzantine Fault Tolerance consensus algorithm for enhancing consortium blockchain efficiency and security
+\end{itemize}
+
+\section*{2.10. Области применения результатов разрешения проблемы}
+\addcontentsline{toc}{section}{2.10. Области применения результатов разрешения проблемы}
+
+\begin{itemize}
+\item Практическое применение технологий распределенного реестра
+\item Blockchain Platform for Industrial Internet of Things
+\item Blockchain-based Database to Ensure Data Integrity in Cloud Computing Environments
+\end{itemize}
+
+\section*{2.11. Выбор одного из рассмотренных подходов и поиск необходимых библиотек, платформ и фреймворков для моделирования.}
+\addcontentsline{toc}{section}{2.11. Выбор одного из рассмотренных подходов и поиск необходимых библиотек, платформ и фреймворков для моделирования.}
+
+В качестве интересного практического примера можно взять блокчейн Etherium: этой осенью они осуществили переход от одного алгоритма консесуса к другому.
+
+
+\chapter*{Задание 3. Дополнить список цифровых источников.}
+\addcontentsline{toc}{chapter}{Задание 3. Дополнить список цифровых источников.}
+
+\textbf{Задание:} Дополнить список цифровых источников ЛР1, ЛР2 и ЛР3 своими 2-3 дополнительными ресурсами. При необходимости провести в них поиск источников.
+
+\vspace{1cm}
+
+Хорошим примером перехода от одной модели консенсуса к другой (от proof-of-work к proof-of-stake) является сеть Etherium. Дополнительным цифровым источником будет являться исходный код ноды блокчейна, размещённый в хранилище кода GitHub:\\
+\url{https://github.com/ethereum/go-ethereum}.
+
+Кроме того, имеется отдельный репозиторий, который содержит предложения пользователей по улучшению продукта. Эти приложения формально не являются научными документами, однако обладают некоторыми научными признаками:
+\begin{itemize}
+\item Они оформлены по устоявшемуся шаблону
+\item Они проходят публичное обсуждение
+\item Они подкреплены ссылками на другие значимые источники
+\end{itemize}
+Ссылка на репозиторий: \url{https://github.com/ethereum/EIPs}
+
+
+\chapter*{Задание 4. Поиск источников с подходящими БД.}
+\addcontentsline{toc}{chapter}{Задание 4. Поиск источников с подходящими БД.}
+
+\textbf{Задание:} Предварительный поиск источников с подходящими БД с входными примерами для тестирования и проверки работоспособности выбранного подхода (п.2.11) по теме аналитического отчета, включая проверку наличия необходимых данных в существующих и подходящих по смыслу для исследования подхода:
+
+\begin{enumerate}
+\item{ Для задач кластеризации\\
+\url{https://www.uni-marburg.de/fb12/arbeitsgruppen/datenbionik/data?language_sync=1} (с подробным описанием)\\
+\url{https://www.uni-marburg.de/fb12/arbeitsgruppen/datenbionik/Daten?language_sync=1} (удобные архивы)\\
+\url{http://cs.uef.fi/sipu/datasets/}\\
+\url{http://ana.cachopo.org/datasets-for-single-label-text-categorization} (категоризация текстов)
+}
+\item{ Для задач классификации\\
+\url{https://sci2s.ugr.es/keel/category.php?cat=clas&order=ins#sub2}
+}
+\item{ Базы тестовых и реальных данных разного происхождения (медицинские, геологические и т.п.)\\
+\url{https://archive.ics.uci.edu/ml/index.php}
+}
+\item{ Для разных задач (нужно выбрать тип входных данных) - классификация (тексты, изображения), сегментация (изображения), аннотирование (документов)...\\
+\url{https://dataturks.com/projects/trending}
+}
+\item{Сборники Top Sources For Machine Learning Datasets и 10 Standard Datasets for Practicing Applied Machine Learning\\
+\url{https://towardsdatascience.com/top-sources-for-machine-learning-datasets-bb6d0dc3378b}
+\url{https://machinelearningmastery.com/standard-machine-learning-datasets/}
+}
+\item{\url{https://www.openml.org/}}
+\item{\url{https://data.world/datasets/classification}}
+
+\end{enumerate}
+
+Дополнить 2-3 дополнительными ресурсами с базами тестовых примеров (например, из соревнований по машинному обучению, хакатонов, и т.д.)
+
+Если мы говорим про Etherium, то достаточно запустить ноду блокчейна, и в процессе синхронизации будут получены все данные, которые можно изучать. В то же время, объём этих данные просто огромен, по этой причине специалисты подготовили облегченные датасеты, которые удобно использовать в экспериментах.
+
+\textbf{Блокчейн Ethereum (март 2019)}
+Полные исторические данные о блокчейне Ethereum в реальном времени (BigQuery).
+
+Датасет содержит 8 760 000 строк записей и подготовлен для экспериментов на платформе Kaggle.
+
+\url{https://www.kaggle.com/datasets/bigquery/ethereum-blockchain}
+
+\textbf{Публичный датасет для изучения смарт-контрактов (август 2018)}
+
+Датасет был подготовлен в рамках демонстрации аналитических возможностей платформы гугл по анализу данных.
+
+\url{https://bigquery.cloud.google.com/dataset/bigquery-public-data:ethereum_blockchain}
+
+\textbf{Ethereum (2015)}
+
+Маленький (килобайты) по объёму датасет с примерами торговли в течение дня.
+
+\url{https://datahub.io/cryptocurrency/ethereum#data}
+
+Также дополнительным источником датасетов могут служить платформы:
+\begin{itemize}
+\item https://data.world/datasets/ethereum
+\item https://datahub.io/
+\end{itemize}
+
+\chapter*{Заключение}
+\addcontentsline{toc}{chapter}{Заключение}
+
+Было обнаружено достаточно большое количество узкоспециализированных источников -- лабораторий и кафедр при ведущих мировых ВУЗах. Таким образом, можно выделить следующие группы, занимающиеся изучением Блокчейн:
+\begin{itemize}
+\item Научное сообщество
+\item Коммерческие компании
+\item Независимые исследователи на GitHub
+\end{itemize}
+
+Кроме хранения исходного кода, GitHub выступает как коммуникационная платформа, где независимые исследователи представляют свои предложения для обсуждения сообществом.
+
+При классификации собранных материалов наибольшую сложность вызвало определение подходящей категории для какой-либо публикации. Зачастую, одна и та же работа могла удовлетворять требованиям различных категорий, т.к. покрывала поставленные там вопросы.
+
+В качестве одного из подходов к реализации блокчейна и используемых алгоритмов консенсуса мы упомянули Etherium. Этой осенью проект перешёл с proof-of-work на proof-of-stake подход.
+
+Для анализа данных в Etherium можно установить ноду, и получить все операции которые когда-либо происходили в этой сети с момента её запуска. Однако сообщество заранее подготовило минималистичные датасеты, на которых можно проверить свои модели до запуска на больших данных.
+
+
+\end{document}
+
+%------------------------------------------------------------------------------
+% Examples:
+%
+%
+%
+% \begin{figure}[H]
+% \centering
+% \includegraphics[scale=0.8]{res/pic01}
+% \caption{Picture description}
+% \end{figure}
+%
+%
+%
+% \begin{table}[htb]
+%     \begin{tabularx}{\textwidth}{|X|c|c|c|c|c|}
+%     \hline
+%     \multirow{2}{*}{tb1} & \multirow{2}{*}{tbl2} & \multicolumn{4}{c|}{tbl3} \\
+%     \cline{3-6}
+%     {} & {} & A & B & C & D\\
+%     \hline
+%     Text & {} & Text & {} & {} & {} \\
+%     \hline
+%     \end{tabularx}
+% \caption{Table description}
+% \end{table}
